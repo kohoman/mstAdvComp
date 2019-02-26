@@ -1,7 +1,7 @@
 # ... GNU Make for Bourne Shell ...
 SHELL = /bin/bash
 # ... variable definitions ...
-ENV  = /opt/openfoam5/etc/bashrc
+ENV  = /opt/openfoam6/etc/bashrc
 SLVR = icoFoam
 GEO  = case.geo
 MSH  = case.msh
@@ -11,11 +11,15 @@ PYC  =
 .PHONY : clean help
 help :
 	@echo "make       -> help"
+	@echo "make msh   -> set up default mesh (obm)"
 	@echo "make obm   -> execute OpenFOAM blockMesh"
 	@echo "make gmo   -> convert gmsh to OpenFOAM"
 	@echo "make run   -> execute $(SLVR) solver"
 	@echo "make all   -> execute msh and run"
 	@echo "make clean -> delete msh, run and all"
+
+msh : obm
+
 obm :
 	source $(ENV) && blockMesh
 	touch obm
